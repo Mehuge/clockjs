@@ -1,0 +1,57 @@
+<script src="clock.js"></script>
+<div id="e1"></div>
+<div id="c1"></div>
+<div id="e2"></div>
+<div id="c2"></div>
+<div id="e3"></div>
+<div id="c3"></div>
+<p>Clock</p>
+<div id="c4"></div>
+<div id="drift"></div>
+<script>
+(function(global){
+	var e1 = document.getElementById("e1"),
+		c1 = document.getElementById("c1"),
+		e2 = document.getElementById("e2"),
+		c2 = document.getElementById("c2"),
+		e3 = document.getElementById("e3"),
+		c3 = document.getElementById("c3"),
+		c4 = document.getElementById("c4"),
+		drift = document.getElementById("drift");
+
+	(new Clock()).ready(function(clock) {
+
+		clock.createEvent(Clock.makeTime("2014-02-24 20:00:00",-8), function(evt) {
+console.log(JSON.stringify(evt));
+			e1.textContent = evt.when;
+			c1.textContent = evt.countdown.d + ' days ' 
+				+ evt.countdown.h + ' hours '
+				+ evt.countdown.m + ' minutes '
+				+ evt.countdown.s + ' seconds';
+		});
+
+		clock.createEvent(Clock.makeTime("2014-02-25 15:00:00",-4), function(evt) {
+			e2.textContent = evt.when;
+			c2.textContent = evt.countdown.d + ' days ' 
+				+ evt.countdown.h + ' hours '
+				+ evt.countdown.m + ' minutes '
+				+ evt.countdown.s + ' seconds';
+		});
+
+		clock.createEvent(Clock.makeTime("2014-02-25 15:00:00",4), function(evt) {
+			e3.textContent = evt.when;
+			c3.textContent = evt.countdown.d + ' days ' 
+				+ evt.countdown.h + ' hours '
+				+ evt.countdown.m + ' minutes '
+				+ evt.countdown.s + ' seconds';
+		});
+
+		clock.createClock(function(evt) {
+drift.textContent = evt.drift;
+			c4.textContent = new Date(evt.now);
+		});
+
+	});
+})(window);
+</script>
+
