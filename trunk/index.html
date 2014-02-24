@@ -7,7 +7,7 @@
 <div id="c3"></div>
 <p>Clock</p>
 <div id="c4"></div>
-<div id="drift"></div>
+<div>Drift: <span id="drift"></span></div>
 <script>
 (function(global){
 	var e1 = document.getElementById("e1"),
@@ -22,7 +22,6 @@
 	(new Clock()).ready(function(clock) {
 
 		clock.createEvent(Clock.makeTime("2014-02-24 20:00:00",-8), function(evt) {
-console.log(JSON.stringify(evt));
 			e1.textContent = evt.when;
 			c1.textContent = evt.countdown.d + ' days ' 
 				+ evt.countdown.h + ' hours '
@@ -47,7 +46,7 @@ console.log(JSON.stringify(evt));
 		});
 
 		clock.createClock(function(evt) {
-drift.textContent = evt.drift;
+			drift.textContent = evt.drift;
 			c4.textContent = new Date(evt.now);
 		});
 
