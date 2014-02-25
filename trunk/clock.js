@@ -101,5 +101,5 @@
 		var tzadj = -(off + TZ);
 		return new Date(yy,mm-1,dd,h,m+tzadj,s);
 	};
-	global.Clock = Clock;
+	(global.document.window ? global.document.window : global).Clock = Clock;
 })(window);
